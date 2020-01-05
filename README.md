@@ -10,15 +10,16 @@ A simple userscript for toggling visibility of watched videos in YouTube.
 
 # How to Use
 
-The script adds a small button at the top of the page. Pressing the button cycles through showing watched videos normally, then dimmed, then entirely hidden.  
+The script adds a small button at the top of the page, see screenshot below. Pressing the button cycles through showing watched videos normally, then dimmed, then entirely hidden.  
 
-The button remembers the most recent choice seperately for each of these areas of YouTube: 
+The button keeps track of different areas of YouTube separately.  This allows you to hide watched videos on the Subscriptions page, show watched as dimmed in the sidebar recommendations, and show watched normally on channel pages.  Here are the areas that the button keeps track of:
 - Subscriptions page 
 - Channel pages
 - Trending page
 - Recommendations sidebar when watching a video
 - Everywhere else
 
-The button is at the top of the page to right of the Search box.
+
+You will see the the button at the top of the page, to right of the Search box.
 
 ![screenshot](screenshot.png 'Screenshot')
