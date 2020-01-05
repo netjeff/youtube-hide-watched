@@ -1,8 +1,6 @@
 # youtube-hide-watched
 
-A simple userscript for toggling watched videos in the YouTube subscriptions list, in right recommendations sidebar or on the main page.
-
-The script is published on GreasyFork at: https://greasyfork.org/en/scripts/13040-youtube-hide-watched-videos
+A simple userscript for toggling visibility of watched videos in YouTube.
 
 # Installation
 
@@ -12,6 +10,15 @@ The script is published on GreasyFork at: https://greasyfork.org/en/scripts/1304
 
 # How to Use
 
-The script adds a small button at the top of the page. Pressing the button cycles through showing watched videos normally, then dimmed, then entirely hidden. The state of the button is configured per page which allows you hide watched videos on the Subscriptions page, but keep them visible on the Trending page.
+The script adds a small button at the top of the page. Pressing the button cycles through showing watched videos normally, then dimmed, then entirely hidden.  
+
+The button remembers the most recent choice seperately for each of these areas of YouTube: 
+- Subscriptions page 
+- Channel pages
+- Trending page
+- Recommendations sidebar when watching a video
+- Everywhere else
+
+The button is at the top of the page to right of the Search box.
 
 ![screenshot](screenshot.png 'Screenshot')
