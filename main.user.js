@@ -29,7 +29,7 @@ const REGEX_USER = /.*\/@.*/u;
 
 ((_undefined) => {
 	// Enable for debugging
-	const DEBUG = false;
+	const DEBUG = true;
 
 	// Needed to bypass YouTube's Trusted Types restrictions, ie.
 	// Uncaught TypeError: Failed to set the 'innerHTML' property on 'Element': This document requires 'TrustedHTML' assignment.
@@ -197,8 +197,8 @@ const REGEX_USER = /.*\/@.*/u;
 		const watched = document.querySelectorAll(
 			[
 				'.ytd-thumbnail-overlay-resume-playback-renderer',
-				// 2025-02-01 Update
-				'.ytThumbnailOverlayProgressBarHostWatchedProgressBarSegmentModern',
+				'.ytThumbnailOverlayProgressBarHostWatchedProgressBarSegmentModern', // 2025-02-01 Update
+				'.ytThumbnailOverlayProgressBarHostWatchedProgressBarSegment', // 2025-07-13 Update
 			].join(','),
 		);
 
@@ -313,7 +313,8 @@ const REGEX_USER = /.*\/@.*/u;
 		const section = determineYoutubeSection();
 		const state = localStorage[`YTHWV_STATE_${section}`];
 
-		findWatchedElements().forEach((item, _i) => {
+		logDebug('JEFF: updateClassOnWatchedItems() section is: '+section);
+        findWatchedElements().forEach((item, _i) => {
 			let watchedItem;
 			let dimmedItem;
 
@@ -343,7 +344,10 @@ const REGEX_USER = /.*\/@.*/u;
 			} else if (section === 'playlist') {
 				watchedItem = item.closest('ytd-playlist-video-renderer');
 			} else if (section === 'watch') {
-				watchedItem = item.closest('ytd-compact-video-renderer');
+				logDebug('JEFF: watch section');
+                watchedItem =
+					item.closest('ytd-compact-video-renderer') ||
+					item.closest('yt-lockup-view-model-wiz'); // 2025-07-12 Update
 
 				// Don't hide video if it's going to play next.
 				//
@@ -352,7 +356,8 @@ const REGEX_USER = /.*\/@.*/u;
 				// let's also ignore it as in case of shuffle enabled
 				// we could accidentially hide the item which gonna play next.
 				if (watchedItem?.closest('ytd-compact-autoplay-renderer')) {
-					watchedItem = null;
+					logDebug('JEFF: skip because ytd-compact-autoplay-renderer');
+                    watchedItem = null;
 				}
 
 				// For playlist items, we never hide them, but we will dim
@@ -362,7 +367,9 @@ const REGEX_USER = /.*\/@.*/u;
 				);
 				if (!watchedItem && watchedItemInPlaylist) {
 					dimmedItem = watchedItemInPlaylist;
+                    logDebug('JEFF: dimmedItem = watchedItemInPlaylist');
 				}
+                else { logDebug('JEFF: no dimmedItem'); }
 			} else {
 				// For home page and other areas
 				watchedItem =
